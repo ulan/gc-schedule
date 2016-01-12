@@ -75,6 +75,8 @@ export class Details extends React.Component<DetailsProps, DetailsState> {
           }
           </select> <button onClick={event => this.onRunButtonClick(event)}>{this.state.running ? "Stop" : "Run"}</button>
           </p>
+          <p>Thick lines in the graph show the heap size and the total size of live objects.
+          A thin line is the heap limit. </p>
           <div> {
             this.props.schedulers.map((scheduler: any, i: number) =>
               <div key={i} style={{display: "inline-block", width : width}}>
