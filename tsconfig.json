@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "outDir": "./dist",
+    "sourceMap": false,
+    "target": "ES5"
+  },
+  "filesGlob": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./test/**/*.ts"
+  ],
+  "files": [
+    "./src/data-mutator.ts",
+    "./src/data-scheduler.ts",
+    "./src/mutator.ts",
+    "./src/runner.ts",
+    "./src/scheduler.ts",
+    "./src/test-mutator.ts",
+    "./src/test-runner.ts",
+    "./src/app.tsx",
+    "./src/component-details.tsx",
+    "./src/component-editor.tsx",
+    "./src/component-graph.tsx",
+    "./src/component-results.tsx"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}

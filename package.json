@@ -1,0 +1,20 @@
+{
+  "name": "gc-schedule",
+  "version": "1.0.0",
+  "description": "A tool for visualizing and comparing garbage collection schedulers.",
+  "dependencies": {
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "smoothie": "^1.27.0",
+    "typescript": "^1.7.5"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1"
+  },
+  "scripts": {
+    "pretest": "tsc",
+    "test": "mocha dist/test-*.js"
+  },
+  "author": "Ulan Degenbaev",
+  "license": "MIT"
+}
