@@ -1,0 +1,6 @@
+function sources() {
+    return [
+        "{\n    factor: 1.5,\n    heapLimit: 0,\n    timeLimit: 0,\n    label: function () {\n      return \"Factor Based (\" + this.factor.toString() + \")\";\n    },\n    onStart: function (time, heap) {\n      this.heapLimit = Math.max(1000, heap * this.factor);\n      this.timeLimit = 0;\n    },\n    onTimeLimit: function (time, heap) {\n      throw \"unreachable\";\n    },\n    onHeapLimit: function (time, heap) {\n      return true;\n    },\n    onGarbageCollection: function(time, duration, heapBefore, heapAfter) {\n      this.heapLimit = Math.max(1000, heapAfter * this.factor);\n    }\n}",
+        "{\n    interval: 1000,\n    heapLimit: 0,\n    timeLimit: 0,\n    label: function () {\n      return \"Time Based (\" + this.interval.toString() + \"ms)\";\n    },\n    onStart: function (time, heap) {\n      this.heapLimit = 0;\n      this.timeLimit = time + this.interval;\n    },\n    onTimeLimit: function (time, heap) {\n      return true;\n    },\n    onHeapLimit: function (time, heap) {\n      throw \"unreachable\";\n    },\n    onGarbageCollection: function(time, duration, heapBefore, heapAfter) {\n      this.timeLimit = time + this.interval;\n    }\n}"];
+}
+exports.sources = sources;
