@@ -49,14 +49,29 @@ class App extends React.Component<{}, AppState> {
     let floatingGarbagePercentage = Math.round(this.state.floatingGarbageRatio * 100);
     return (
       <div>
-        <h3>Source Code</h3>
+        <h3>Scheduler</h3>
+        <div style={{width : width}}>
+        <p> A scheduler sets the heap limit and/or the time limit in the <code>onStart</code> callback.
+            Whenever one of the limits is reached, the corresponding
+            <code>onHeapLimit/onTimeLimit</code> callback of the scheduler is invoked with
+            the current heap size and the current time.
+            If the callback returns <code>true</code> then garbage collection is triggered.
+        </p>
+        <p> After garbage collection the <code>onGarbageCollection</code> callback gives the
+            scheduler chance to update the limits.
+        </p>
+        <p>
+         Setting a limit to 0 disables the limit.
+        </p>
+        </div>
         <Editor sources={this.state.sources}
                 schedulers={this.state.schedulers}
                 onSchedulerChange={index => this.onSchedulerChange(index)}/>
         <h3>Garbage Collector Parameters</h3>
+
         <table>
         <tbody>
-        <tr><td><label>Floating Garbage Percentage</label></td><td><input type="range" min="0" max="100" value={floatingGarbagePercentage.toString()} onChange={event => this.onFloatingGarbageChange(event)}/></td><td>{floatingGarbagePercentage}%</td></tr>
+        <tr><td><label>Floating Garbage Percentage</label></td><td><input type="range" min="0" max="100" value={floatingGarbagePercentage.toString()} onChange={event => this.onFloatingGarbageChange(event)}/></td><td>{floatingGarbagePercentage}% - the percentage of dead objects that stay in the heap until the next garbage collection.</td></tr>
         <tr><td><label>Garbage Collection Speed</label></td><td><input type="range" min="102400" max="10485760" value={this.state.gcSpeed.toString()} onChange={event => this.onGcSpeedChange(event)}/></td><td>{Math.round(this.state.gcSpeed / 1024 / 1024 * 10) / 10} MB/ms</td></tr>
         </tbody>
         </table>
