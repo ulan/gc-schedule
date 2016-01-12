@@ -68,7 +68,7 @@ var Details = (function (_super) {
         var mutator = this.props.mutators[this.state.mutatorIndex];
         return (React.createElement("div", null, React.createElement("p", null, "Application: ", React.createElement("select", {"onChange": this.onMutatorChange.bind(this), "value": this.state.mutatorIndex.toString()}, this.props.mutators.map(function (m, i) {
             return React.createElement("option", {"key": i, "value": i.toString()}, m.label);
-        })), " ", React.createElement("button", {"onClick": function (event) { return _this.onRunButtonClick(event); }}, this.state.running ? "Stop" : "Run")), React.createElement("div", null, " ", this.props.schedulers.map(function (scheduler, i) {
+        })), " ", React.createElement("button", {"onClick": function (event) { return _this.onRunButtonClick(event); }}, this.state.running ? "Stop" : "Run")), React.createElement("p", null, "Thick lines in the graph show the heap size and the total size of live objects." + ' ' + "A thin line is the heap limit. "), React.createElement("div", null, " ", this.props.schedulers.map(function (scheduler, i) {
             return React.createElement("div", {"key": i, "style": { display: "inline-block", width: width }}, React.createElement(component_graph_1.Graph, {"width": 300, "height": 150, "duration": mutator.duration, "gcSpeed": _this.props.gcSpeed, "floatingGarbageRatio": _this.props.floatingGarbageRatio, "step": _this.props.step, "mutator": mutator, "scheduler": scheduler, "running": _this.state.running, "runCount": _this.state.runCount}));
         }))));
     };
