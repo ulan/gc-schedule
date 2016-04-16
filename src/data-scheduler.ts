@@ -41,5 +41,7 @@ export function sources() {
     onGarbageCollection: function(time, duration, heapBefore, heapAfter) {
       this.timeLimit = time + this.interval;
     }
-}`];
+}`,
+`Schedulers.throughputBased()`
+];
 }

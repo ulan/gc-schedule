@@ -1,6 +1,8 @@
 import React = require("react");
 
 import {Scheduler} from "./scheduler";
+import Schedulers = require("./scheduler");
+let periodic = Schedulers.periodic(1000);
 
 class EditorProps {
   sources: string [];

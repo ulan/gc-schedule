@@ -11,7 +11,10 @@ import {Mutator} from "./mutator";
 import {Scheduler} from "./scheduler";
 
 import Mutators = require("./data-mutator");
-import Schedulers = require("./data-scheduler");
+import SchedulerSources = require("./data-scheduler");
+import Schedulers = require("./scheduler");
+
+let periodic = Schedulers.periodic(1000);
 
 class AppState {
   mutators: Mutator[];
@@ -22,7 +25,7 @@ class AppState {
   step: number;
   constructor() {
     this.mutators = Mutators.mutators();
-    this.sources = Schedulers.sources();
+    this.sources = SchedulerSources.sources();
     this.schedulers = this.sources.map(source => eval("(" + source + ")"));
     this.gcSpeed = 1000000;
     this.floatingGarbageRatio = 0.0;

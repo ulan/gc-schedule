@@ -3,6 +3,8 @@ import React = require("react");
 import {Mutator} from "./mutator";
 import {Scheduler} from "./scheduler";
 import {Runner, GarbageCollection} from "./runner";
+import Schedulers = require("./scheduler");
+let periodic = Schedulers.periodic(1000);
 
 const MB = 1024 * 1024;
 
