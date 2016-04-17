@@ -96,8 +96,8 @@ class ThroughputTracker {
       sumDuration += this.buffer[i].duration;
       if (sumDuration >= time) break;
     }
-    if (sumDuration == 0) return initial;
-    return sumBytes / sumDuration
+    if (sumDuration === 0) return initial;
+    return sumBytes / sumDuration;
   }
 }
 
@@ -145,10 +145,34 @@ class ThroughputBasedScheduler {
   onGarbageCollection(time: number, duration: number,
                       heapBefore: number, heapAfter: number): void {
     this.timeLimit = time + this.period;
+    this.collections.add(heapBefore, duration);
+    let mutatorSpeed = this.allocations.throughput(5000);
+    let gcSpeed = this.collections.throughput(5000);
+    this.factor = this.computeFactor(gcSpeed, mutatorSpeed);
     this.heapLimit = Math.max(heapAfter * this.factor, 1000);
     this.lastHeap = heapAfter;
     this.lastTime = time;
-    this.collections.add(heapBefore, duration);
+  }
+  mutatorUtilization(mutatorSpeed, gcSpeed) {
+    const minMutatorUtilization = 0.0;
+    const conservativeGcSpeedInBytesPerMillisecond = 200000;
+    if (mutatorSpeed === 0) return minMutatorUtilization;
+    if (gcSpeed === 0) gcSpeed = conservativeGcSpeedInBytesPerMillisecond;
+    return gcSpeed / (mutatorSpeed + gcSpeed);
+  }
+  computeFactor(gcSpeed, mutatorSpeed) {
+    const maxFactor = 1.5;
+    const minFactor = 1.1;
+    if (gcSpeed === 0 || mutatorSpeed === 0) return maxFactor;
+    const speedRatio = gcSpeed / mutatorSpeed;
+    const mu = 0.97;
+    const a = speedRatio * (1 - mu);
+    const b = speedRatio * (1 - mu) - mu;
+    let factor = a / b;
+    factor = Math.min(factor, maxFactor);
+    factor = Math.max(factor, minFactor);
+    console.log(factor);
+    return factor;
   }
 }
 

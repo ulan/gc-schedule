@@ -165,6 +165,6 @@ export class Runner {
     return this.avgHeap / this.time;
   }
   computeDurationOfGC(heap: number, dead: number): number {
-    return Math.max(1, heap / this.gcSpeed);
+    return heap / this.gcSpeed;
   }
 }

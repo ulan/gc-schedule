@@ -13,7 +13,6 @@ import {Scheduler} from "./scheduler";
 import Mutators = require("./data-mutator");
 import SchedulerSources = require("./data-scheduler");
 import Schedulers = require("./scheduler");
-
 let periodic = Schedulers.periodic(1000);
 
 class AppState {
